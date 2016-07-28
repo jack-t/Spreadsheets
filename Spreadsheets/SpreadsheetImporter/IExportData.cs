@@ -6,7 +6,7 @@ namespace SpreadsheetImporter
     /// <summary>
     /// This is a separate interface because I'm virtually certain this will require some extra data to be passed
     /// </summary>
-    public interface ISpreadsheetData
+    public interface IExportData
     {
         DataTable Table { get; }
         Guid SheetGuid { get; }

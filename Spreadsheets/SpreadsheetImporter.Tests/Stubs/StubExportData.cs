@@ -2,7 +2,7 @@
 
 namespace SpreadsheetImporter.Tests.Stubs
 {
-    public class StubSpreadsheetData : ISpreadsheetData
+    public class StubExportData : IExportData
     {
         public DataTable Table { get; set; }
     }
