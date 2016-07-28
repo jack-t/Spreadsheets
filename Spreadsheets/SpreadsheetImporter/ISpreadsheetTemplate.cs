@@ -1,12 +1,11 @@
-﻿using System.Data;
-using System.IO;
+﻿using System.IO;
 
 namespace SpreadsheetImporter
 {
     public interface ISpreadsheetTemplate
     {
         /// <summary>
-        /// A stream which provides the template file such that it can be fed into library that reads excel files.
+        /// A stream which provides the template file such that it can be fed into a library that reads excel files.
         /// </summary>
         Stream TemplateStream { get; }
         /// <summary>
@@ -15,11 +14,5 @@ namespace SpreadsheetImporter
         /// </summary>
         int FirstDataRow { get; }
         
-    }
-
-    public interface IExportData
-    {
-        DataTable Table { get; }
-
     }
 }

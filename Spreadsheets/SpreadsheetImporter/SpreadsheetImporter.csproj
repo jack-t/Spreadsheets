@@ -48,9 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="ISpreadsheetData.cs" />
+    <Compile Include="ISpreadsheetTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpreadsheetExporter.cs" />
+    <Compile Include="SpreadsheetExporterService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
