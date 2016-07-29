@@ -3,12 +3,13 @@ namespace SpreadsheetImporter
     public interface ISpreadsheetValidator
     {
         /// <summary>
-        /// Looks at the GUID, mostly likely, and decides if this data is safe to import
+        /// This method may need to validate two things: 
+        /// * The GUID is correct.
+        /// * The data is in such a format that the importer will run correctly.
         /// </summary>
         /// <param name="template"></param>
         /// <param name="data"></param>
         /// <returns></returns>
         bool IsValidData(ImportData data);
-
     }
 }

@@ -16,5 +16,6 @@ namespace SpreadsheetImporter
 
         string DataSheetName { get; }
         string GuidCell { get; }
+        
     }
 }

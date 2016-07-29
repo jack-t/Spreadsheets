@@ -5,9 +5,4 @@ namespace SpreadsheetImporter
     {
         void ImportSpreadsheet(ImportData data);
     }
-
-    public class DefaultSpreadsheetImporter
-    {
-        
-    }
 }
