@@ -1,9 +1,12 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 
 namespace SpreadsheetImporter.Tests.Stubs
 {
-    public class StubExportData : IExportData
+    public class StubExportData : ExportData
     {
-        public DataTable Table { get; set; }
+        public StubExportData(DataTable table, Guid? sheetGuid) : base(table, sheetGuid)
+        {
+        }
     }
 }

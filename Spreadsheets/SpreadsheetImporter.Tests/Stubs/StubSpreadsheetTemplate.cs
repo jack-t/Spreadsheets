@@ -1,15 +1,23 @@
-﻿using System.IO;
+﻿using Spire.Xls;
 
 namespace SpreadsheetImporter.Tests.Stubs
 {
     public class StubSpreadsheetTemplate : ISpreadsheetTemplate
     {
-        public Stream TemplateStream { get; private set; }
-        public int FirstDataRow { get { return 0; } }
-
-        public StubSpreadsheetTemplate(Stream stream)
+        public Workbook GetTemplateStream()
         {
-            TemplateStream = stream;
+            return _package;
+        }
+
+        public int FirstDataRow => 2;
+        public string DataSheetName => "Sheet1";
+        public string GuidCell => "AA1";
+
+        private Workbook _package;
+
+        public StubSpreadsheetTemplate(Workbook package)
+        {
+            _package = package;
         }
     }
 }

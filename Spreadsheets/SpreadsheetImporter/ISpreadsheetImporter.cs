@@ -1,9 +1,13 @@
-﻿using OfficeOpenXml;
-
+﻿
 namespace SpreadsheetImporter
 {
     public interface ISpreadsheetImporter
     {
-        void ImportSpreadsheet(IImportData data);
+        void ImportSpreadsheet(ImportData data);
+    }
+
+    public class DefaultSpreadsheetImporter
+    {
+        
     }
 }

@@ -1,5 +1,3 @@
-using System.Net.Configuration;
-
 namespace SpreadsheetImporter
 {
     public interface ISpreadsheetValidator
@@ -10,7 +8,7 @@ namespace SpreadsheetImporter
         /// <param name="template"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        bool IsValidData(IImportData data);
+        bool IsValidData(ImportData data);
 
     }
 }
