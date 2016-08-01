@@ -9,14 +9,12 @@ namespace SpreadsheetImporter
         private readonly ISqlConnectionProvider _connectionProvider;
         private readonly Dictionary<string, string> _dataTableDataStoreColumnMap;
         private readonly string _storedProcedure;
-        private readonly string _tableTypeName;
 
-        public DefaultSpreadsheetImporter(ISqlConnectionProvider connectionProvider, Dictionary<string, string> dataTableDataStoreColumnMap, string storedProcedure, string tableTypeName)
+        public DefaultSpreadsheetImporter(ISqlConnectionProvider connectionProvider, Dictionary<string, string> dataTableDataStoreColumnMap, string storedProcedure)
         {
             _connectionProvider = connectionProvider;
             _dataTableDataStoreColumnMap = dataTableDataStoreColumnMap;
             _storedProcedure = storedProcedure;
-            _tableTypeName = tableTypeName;
         }
 
         public void ImportSpreadsheet(ImportData data)

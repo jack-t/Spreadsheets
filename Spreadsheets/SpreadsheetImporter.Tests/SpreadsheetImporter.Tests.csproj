@@ -71,6 +71,8 @@
   <ItemGroup>
     <Compile Include="DefaultSpreadsheetExporterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpreadsheetServiceTests.cs" />
+    <Compile Include="Stubs\FindGuidTestTemplateStub.cs" />
     <Compile Include="Stubs\StubExportData.cs" />
     <Compile Include="Stubs\StubSpreadsheetTemplate.cs" />
   </ItemGroup>
