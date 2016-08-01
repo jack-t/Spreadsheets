@@ -10,4 +10,7 @@ It is based around a series of interfaces:
 * The `ISpreadsheetTemplate` handles providing a template for the exporter to build from. Header names, which the default exporter uses to line up incoming data, should be included here.
 * The `ISpreadsheetValidator` makes sure that incoming spreadsheets are OK to be imported.
 
+----------------------
 
+The default exporter will export the data in the data table to the last column with the appropriate header in the sheet.
+This means that a template with two columns with the same header will only have data, post-export, in the latter column. I decided to do it this way becasue the initial spreadsheet we're using requires this quirk.
