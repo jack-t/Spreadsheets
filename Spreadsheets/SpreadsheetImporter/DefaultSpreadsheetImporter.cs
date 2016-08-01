@@ -19,6 +19,7 @@ namespace SpreadsheetImporter
 
         public void ImportSpreadsheet(ImportData data)
         {
+            
             using (var cnn = _connectionProvider.GetConnection())
             {
                 using (var cmd = cnn.CreateCommand())
@@ -32,9 +33,17 @@ namespace SpreadsheetImporter
             }
         }
 
-        public DataTable StripExcelData(Workbook workbook, string sheet)
+        public DataTable StripExcelData(Workbook workbook, ISpreadsheetTemplate template)
         {
-            return workbook.Worksheets[sheet].ExportDataTable(); 
+            var sheet = workbook.Worksheets[template.DataSheetName];
+            for (int i = template.FirstDataRow;; i++)
+            {
+                foreach (var entry in template.ImportColumnMap)
+                {
+
+                }
+
+            }
         }
     }
 

@@ -20,7 +20,9 @@ namespace SpreadsheetImporter
         /// <summary>
         /// Maps columns in the data recieved to the columns in the template.
         /// </summary>
-        Dictionary<string, int> ColumnMap { get; }
+        Dictionary<string, int> ExportColumnMap { get; }
+        Dictionary<int, string> ImportColumnMap { get; }
+
 
     }
 }
