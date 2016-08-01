@@ -14,3 +14,8 @@ It is based around a series of interfaces:
 
 The default exporter will export the data in the data table to the last column with the appropriate header in the sheet.
 This means that a template with two columns with the same header will only have data, post-export, in the latter column. I decided to do it this way becasue the initial spreadsheet we're using requires this quirk.
+
+----------------------
+
+Each spreadsheet service (and accompanying set of interfaces, templates, etc.) needs a stored procedure that will process the data that is being imported. (That's if you're using the default importer. If not, then you're doing your own thing.)
+For the default importer, the single parameter is a "structured" parameter, to which is passed the `DataTable` that the spreadsheet gave us.
