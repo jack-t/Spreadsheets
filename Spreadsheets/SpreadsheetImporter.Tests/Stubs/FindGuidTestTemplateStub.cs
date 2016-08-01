@@ -17,6 +17,11 @@ namespace SpreadsheetImporter.Tests.Stubs
             }
         }
 
+        public int HeaderRow
+        {
+            get { throw new System.NotImplementedException(); }
+        }
+
         public string DataSheetName => "Sheet1";
         public string GuidCell => "AA1";
     }

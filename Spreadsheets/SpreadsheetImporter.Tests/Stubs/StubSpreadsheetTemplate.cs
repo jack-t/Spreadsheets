@@ -10,6 +10,7 @@ namespace SpreadsheetImporter.Tests.Stubs
         }
 
         public int FirstDataRow => 2;
+        public int HeaderRow => 1;
         public string DataSheetName => "Sheet1";
         public string GuidCell => "AA1";
 

@@ -13,7 +13,7 @@ namespace SpreadsheetImporter
         /// This is necessary, I think, because it's possible some other sort of data could be kept above the headers or w/e.
         /// </summary>
         int FirstDataRow { get; }
-
+        int HeaderRow { get; }
         string DataSheetName { get; }
         string GuidCell { get; }
         
