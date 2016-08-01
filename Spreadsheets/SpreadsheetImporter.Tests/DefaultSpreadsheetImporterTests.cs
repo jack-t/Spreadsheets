@@ -14,30 +14,46 @@ namespace SpreadsheetImporter.Tests
     [TestClass()]
     public class DefaultSpreadsheetImporterTests
     {
-        [TestMethod()]
-        public void ImportSpreadsheetTest()
+        [TestClass()]
+        public class StripExcelDataTests
         {
-            Workbook workbook = new Workbook();
-            workbook.Worksheets["Sheet1"]["A1"].Value = "column1";
-            workbook.Worksheets["Sheet1"]["A2"].Value = "column2";
-            workbook.Worksheets["Sheet1"]["A3"].Value = "column3";
-            ISpreadsheetTemplate template = new StubSpreadsheetTemplate(workbook);
-            ISqlConnectionProvider connectionProvider = new DefaultSqlConnectionProvider("main");
-            DefaultSpreadsheetImporter importer = new DefaultSpreadsheetImporter(connectionProvider, "InsertIntoTestSP");
+            private Workbook _workbook;
+            private ISpreadsheetTemplate _template;
+            private ISqlConnectionProvider _connectionProvider;
+            private DefaultSpreadsheetImporter _importer;
+            private DataTable _table;
 
-            DataTable table = new DataTable();
-            table.Columns.Add("column1");
-            table.Columns.Add("column2");
-            table.Columns.Add("column3");
+            [TestInitialize()]
+            public void Init()
+            {
+                _workbook = new Workbook();
+                _workbook.Worksheets["Sheet1"]["A1"].Value = "column1";
+                _workbook.Worksheets["Sheet1"]["A2"].Value = "column2";
+                _workbook.Worksheets["Sheet1"]["A3"].Value = "column3";
+                _template = new StubSpreadsheetTemplate(_workbook);
+                _connectionProvider = new DefaultSqlConnectionProvider("main");
+                _importer = new DefaultSpreadsheetImporter(_connectionProvider,
+                    "InsertIntoTestSP");
 
-            table.Rows.Add(1, 2, 3);
-            table.Rows.Add(1, 2, 3);
-            table.Rows.Add(1, 2, 3);
+                _table = _importer.StripExcelData(_workbook, "Sheet1");
+            }
 
-            ImportData data = new ImportData(table, null, template);
+            [ExpectedException(typeof(IndexOutOfRangeException))]
+            [TestMethod()]
+            public void StripExcelDataTest()
+            {
+                _workbook.Worksheets["Sheet1"]["A4"].Value = "column3";
 
-            importer.ImportSpreadsheet(data);
+                var columnName = _table.Columns[3].ColumnName; // this should throw an exception
+            }
 
+            [TestMethod()]
+            public void StripExcelData_CorrectColumnNames()
+            {
+                Assert.AreEqual("column1", _table.Columns[0].ColumnName);
+                Assert.AreEqual("column2", _table.Columns[1].ColumnName);
+                Assert.AreEqual("column3", _table.Columns[2].ColumnName);
+            }
         }
     }
 }

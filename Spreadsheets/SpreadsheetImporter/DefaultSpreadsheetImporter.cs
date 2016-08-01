@@ -2,6 +2,8 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using Spire.Xls;
+
 namespace SpreadsheetImporter
 {
     public class DefaultSpreadsheetImporter : ISpreadsheetImporter
@@ -28,6 +30,11 @@ namespace SpreadsheetImporter
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+
+        public DataTable StripExcelData(Workbook workbook, string sheet)
+        {
+            return workbook.Worksheets[sheet].ExportDataTable(); 
         }
     }
 

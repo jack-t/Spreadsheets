@@ -22,11 +22,19 @@ namespace SpreadsheetImporter
         /// <param name="template">Something you find in the database, most likely</param>
         /// <param name="data">The current data pulled from the database as requested by the client</param>
         /// <returns>A stream which can be turned into a download-able file to be returned to the user.</returns>
-        public Stream ExportSpreadsheet(ISpreadsheetTemplate template, ExportData data)
+        public Stream ExportSpreadsheetToStream(ISpreadsheetTemplate template, ExportData data)
         {
             MemoryStream ret = new MemoryStream();
             _exporter.ExportSpreadsheet(data, template, ret);
             return ret;
+        }
+
+        public void ExportSpreadsheetToFile(ISpreadsheetTemplate template, ExportData data, string path)
+        {
+            using (var ret = File.Open(path, FileMode.OpenOrCreate))
+            {
+                _exporter.ExportSpreadsheet(data, template, ret);
+            }
         }
 
         public void ImportSpreadsheet(Stream data)
@@ -34,8 +42,8 @@ namespace SpreadsheetImporter
             Workbook package = new Workbook();
             package.LoadFromStream(data);
             var guid = FindGuid(package);
-
-            ImportData importData = new ImportData(package.Worksheets[_template.DataSheetName].ExportDataTable(), guid, _template);
+            var table = package.Worksheets[_template.DataSheetName].ExportDataTable();
+            ImportData importData = new ImportData(table, guid, _template);
 
             if (!_validator.IsValidData(importData)) throw new Exception("Spreadsheet data was not valid");
 

@@ -9,12 +9,12 @@ namespace SpreadsheetImporter
     {
         public void ExportSpreadsheet(ExportData data, ISpreadsheetTemplate template, Stream outputStream)
         {
-            var package = template.GetTemplateStream();
+            var package = template.GetTemplate();
             var sheet = package.Worksheets[template.DataSheetName];
             sheet[template.GuidCell].Value = data.SheetGuid.ToString();
 
             int headerRow = template.HeaderRow;
-            foreach (var entry in GetTemplateColumnsMap(sheet, headerRow))
+            foreach (var entry in template.ColumnMap)
             {
                 if (!data.Table.Columns.Contains(entry.Key)) continue;
 
@@ -27,22 +27,6 @@ namespace SpreadsheetImporter
         }
 
 
-        private static Dictionary<string, int> GetTemplateColumnsMap(Worksheet sheet, int headerRow)
-        {
-            var sheetColumns = new Dictionary<string, int>();
-            bool lastEmpty = false;
-            for (var col = 1; ; col++)
-            {
-                var header = sheet.GetText(headerRow, col);
-                if (string.IsNullOrWhiteSpace(header))
-                {
-                    if (lastEmpty) break;
-                    lastEmpty = true;
-                    continue; // don't map an empty column.
-                }
-                sheetColumns[header] = col;
-            }
-            return sheetColumns;
-        }
+     
     }
 }

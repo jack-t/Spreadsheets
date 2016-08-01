@@ -4,7 +4,7 @@ namespace SpreadsheetImporter.Tests.Stubs
 {
     public class FindGuidTestTemplateStub : ISpreadsheetTemplate
     {
-        public Workbook GetTemplateStream()
+        public Workbook GetTemplate()
         {
             throw new System.NotImplementedException();
         }

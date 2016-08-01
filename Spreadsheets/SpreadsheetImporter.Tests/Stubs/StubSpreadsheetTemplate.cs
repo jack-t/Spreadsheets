@@ -4,7 +4,7 @@ namespace SpreadsheetImporter.Tests.Stubs
 {
     public class StubSpreadsheetTemplate : ISpreadsheetTemplate
     {
-        public Workbook GetTemplateStream()
+        public Workbook GetTemplate()
         {
             return _package;
         }
