@@ -7,13 +7,11 @@ namespace SpreadsheetImporter
     public class DefaultSpreadsheetImporter : ISpreadsheetImporter
     {
         private readonly ISqlConnectionProvider _connectionProvider;
-        private readonly Dictionary<string, string> _dataTableDataStoreColumnMap;
         private readonly string _storedProcedure;
 
-        public DefaultSpreadsheetImporter(ISqlConnectionProvider connectionProvider, Dictionary<string, string> dataTableDataStoreColumnMap, string storedProcedure)
+        public DefaultSpreadsheetImporter(ISqlConnectionProvider connectionProvider, string storedProcedure)
         {
             _connectionProvider = connectionProvider;
-            _dataTableDataStoreColumnMap = dataTableDataStoreColumnMap;
             _storedProcedure = storedProcedure;
         }
 
@@ -24,7 +22,7 @@ namespace SpreadsheetImporter
                 using (var cmd = cnn.CreateCommand())
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandText = $"EXEC {_storedProcedure} @parameter";
+                    cmd.CommandText = _storedProcedure;
                     cmd.Parameters.Add("@parameter", SqlDbType.Structured).Value = data.Table;
                     cnn.Open();
                     cmd.ExecuteNonQuery();
