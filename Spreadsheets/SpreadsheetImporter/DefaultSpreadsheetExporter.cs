@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics.Contracts;
 using System.IO;
 using Spire.Xls;
 
@@ -7,6 +9,13 @@ namespace SpreadsheetImporter
 {
     public class DefaultSpreadsheetExporter : ISpreadsheetExporter
     {
+        private readonly Action<Workbook> _postProcessingStep;
+
+        public DefaultSpreadsheetExporter(Action<Workbook> postProcessingFunc = null)
+        {
+            _postProcessingStep = postProcessingFunc;
+        }
+
         public void ExportSpreadsheet(ExportData data, ISpreadsheetTemplate template, Stream outputStream)
         {
             var package = template.GetTemplate();
@@ -23,10 +32,10 @@ namespace SpreadsheetImporter
                 sheet.InsertDataTable(table, false, template.FirstDataRow, entry.Value);
             }
 
+            // last step, give the user the opportunity to change the result.
+            _postProcessingStep?.Invoke(package); // .Invoke to take advantage of the Elvis operator
+
             package.SaveToStream(outputStream);
         }
-
-
-     
     }
 }

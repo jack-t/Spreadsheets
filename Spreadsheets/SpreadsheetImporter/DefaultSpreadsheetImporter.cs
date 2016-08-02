@@ -47,11 +47,21 @@ namespace SpreadsheetImporter
                 var row = ret.NewRow();
                 foreach (var entry in template.ImportColumnMap)
                 {
-                    row[entry.Value] = sheet[i, entry.Key].Value2;
+                    row[entry.Value] = GetCellValue(sheet, i, entry.Key);
                 }
                 ret.Rows.Add(row);
             }
             return ret;
+        }
+
+        private object GetCellValue(Worksheet sheet, int row, int col)
+        {
+            var cell = sheet[row, col];
+            object value;
+            if (cell.HasFormulaStringValue || cell.HasFormulaBoolValue || cell.HasFormulaDateTime ||
+                cell.HasFormulaNumberValue) value = cell.FormulaValue;
+            else value = cell.Value2;
+            return value;
         }
     }
 
