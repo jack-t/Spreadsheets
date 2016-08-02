@@ -15,4 +15,4 @@ It is based around a series of interfaces:
 Each spreadsheet service (and accompanying set of interfaces, templates, etc.) needs a stored procedure that will process the data that is being imported. (That's if you're using the default importer. If not, then you're doing your own thing.)
 For the default importer, the single parameter is a "structured" parameter, to which is passed the `DataTable` that was pulled out of the spreadsheet with `ISpreadsheetImporter.StripExcelData()`.
 
-**There is no validation that the data given to the stored procedure will not be null or empty in the `DefaultSpreadsheetImporter`. The stored procedure must deal with that.
+**There is no validation that the data given to the stored procedure will not be null or empty in the `DefaultSpreadsheetImporter`. The stored procedure must deal with that.**
