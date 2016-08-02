@@ -42,7 +42,7 @@ namespace SpreadsheetImporter
             Workbook package = new Workbook();
             package.LoadFromStream(data);
             var guid = FindGuid(package);
-            var table = package.Worksheets[_template.DataSheetName].ExportDataTable();
+            var table = _importer.StripExcelData(package, _template);
             ImportData importData = new ImportData(table, guid, _template);
 
             if (!_validator.IsValidData(importData)) throw new Exception("Spreadsheet data was not valid");

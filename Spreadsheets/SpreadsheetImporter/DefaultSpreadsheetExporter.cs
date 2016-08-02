@@ -14,7 +14,7 @@ namespace SpreadsheetImporter
             sheet[template.GuidCell].Value = data.SheetGuid.ToString();
 
             int headerRow = template.HeaderRow;
-            foreach (var entry in template.ColumnMap)
+            foreach (var entry in template.ExportColumnMap)
             {
                 if (!data.Table.Columns.Contains(entry.Key)) continue;
 

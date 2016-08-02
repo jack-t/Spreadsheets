@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using Spire.Xls;
+using System.Linq;
 
 namespace SpreadsheetImporter
 {
@@ -19,7 +20,7 @@ namespace SpreadsheetImporter
 
         public void ImportSpreadsheet(ImportData data)
         {
-            
+
             using (var cnn = _connectionProvider.GetConnection())
             {
                 using (var cmd = cnn.CreateCommand())
@@ -35,15 +36,22 @@ namespace SpreadsheetImporter
 
         public DataTable StripExcelData(Workbook workbook, ISpreadsheetTemplate template)
         {
+            DataTable ret = new DataTable();
             var sheet = workbook.Worksheets[template.DataSheetName];
-            for (int i = template.FirstDataRow;; i++)
+            int lastRow = template.FindLastRowOfData(sheet);
+
+            template.ImportColumnMap.Values.ToList().ForEach(col => ret.Columns.Add(col));
+
+            for (int i = template.FirstDataRow; i <= lastRow; i++)
             {
+                var row = ret.NewRow();
                 foreach (var entry in template.ImportColumnMap)
                 {
-
+                    row[entry.Value] = sheet[i, entry.Key].Value2;
                 }
-
+                ret.Rows.Add(row);
             }
+            return ret;
         }
     }
 

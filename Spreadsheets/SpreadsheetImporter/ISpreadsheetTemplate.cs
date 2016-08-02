@@ -23,6 +23,7 @@ namespace SpreadsheetImporter
         Dictionary<string, int> ExportColumnMap { get; }
         Dictionary<int, string> ImportColumnMap { get; }
 
+        int FindLastRowOfData(Worksheet worksheet);
 
     }
 }
