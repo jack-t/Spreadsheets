@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Services.Fee>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h2>Manage Spreadsheets</h2>
+<div class="row">
+    <div class="col-md-6">
+        <h4>Import</h4>
+        @*@using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            
+        }
+
+        <form asp-controller="Home" asp-action="Upload">
+            <label class="btn btn-default" >Choose Upload File<input class="hidden" type="file" name="file"/></label>
+            <input type="submit" class="btn btn-primary" value="Submit"/>
+        </form>*@
+
+        <form method="post" asp-action="Upload" asp-controller="Home" enctype="multipart/form-data">
+            <label class="btn btn-default">Choose Upload File<input class="hidden" type="file" name="file"/></label>
+            <input type="submit" value="Submit" class="btn btn-primary"/>
+        </form>
+
+    </div>
+    <div class="col-md-6">
+        <h4>Export</h4>
+        <a class="btn btn-primary" asp-controller="Home" asp-action="Export">Export Spreadsheet</a>
+    </div>
+</div>
+<h2>Current Fees<span class="glyphicon glyphicon-refresh current-fees-refresh"></span></h2>
+
+<div id="spreadsheet">@Html.Partial("_CurrentFees", Model)</div>

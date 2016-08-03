@@ -19,21 +19,20 @@ namespace SpreadsheetImporter
             _template = template;
         }
 
-        /// <param name="template">Something you find in the database, most likely</param>
         /// <param name="data">The current data pulled from the database as requested by the client</param>
         /// <returns>A stream which can be turned into a download-able file to be returned to the user.</returns>
-        public Stream ExportSpreadsheetToStream(ISpreadsheetTemplate template, ExportData data)
+        public Stream ExportSpreadsheetToStream(ExportData data)
         {
             MemoryStream ret = new MemoryStream();
-            _exporter.ExportSpreadsheet(data, template, ret);
+            _exporter.ExportSpreadsheet(data, _template, ret);
             return ret;
         }
 
-        public void ExportSpreadsheetToFile(ISpreadsheetTemplate template, ExportData data, string path)
+        public void ExportSpreadsheetToFile(ExportData data, string path)
         {
             using (var ret = File.Open(path, FileMode.OpenOrCreate))
             {
-                _exporter.ExportSpreadsheet(data, template, ret);
+                _exporter.ExportSpreadsheet(data, _template, ret);
             }
         }
 

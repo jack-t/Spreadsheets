@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Services.Fee>
+<table class="table-bordered table-hover table col-md-6">
+    <thead>
+        <tr>
+            <th>State</th>
+            <th>County</th>
+            <th>Product Type Name</th>
+            <th>Current Price</th>
+            <th>Pending</th>
+        </tr>
+    </thead>
+
+    @foreach (var fee in Model)
+    {
+        <tr>
+            <td>@fee.State</td>
+            <td>@fee.County</td>
+            <td>@fee.ProductTypeName</td>
+            <td>$@fee.CurrentPrice</td>
+            <td>@fee.Pending</td>
+        </tr>
+    }
+</table>

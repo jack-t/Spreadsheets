@@ -72,17 +72,17 @@ namespace SpreadsheetImporter
 
     public class DefaultSqlConnectionProvider : ISqlConnectionProvider
     {
-        private readonly string _configConnectionStringKey;
+        private readonly string _connectionString;
 
-        public DefaultSqlConnectionProvider(string key)
+        public DefaultSqlConnectionProvider(string str)
         {
-            _configConnectionStringKey = key;
+            _connectionString = str;
         }
 
 
         public SqlConnection GetConnection()
         {
-            return new SqlConnection(ConfigurationManager.ConnectionStrings[_configConnectionStringKey].ConnectionString);
+            return new SqlConnection(_connectionString);
         }
     }
 }

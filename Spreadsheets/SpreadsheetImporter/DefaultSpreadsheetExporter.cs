@@ -19,6 +19,8 @@ namespace SpreadsheetImporter
         public void ExportSpreadsheet(ExportData data, ISpreadsheetTemplate template, Stream outputStream)
         {
             var package = template.GetTemplate();
+            package.Version = ExcelVersion.Version2013;
+
             var sheet = package.Worksheets[template.DataSheetName];
             sheet[template.GuidCell].Value = data.SheetGuid.ToString();
 
