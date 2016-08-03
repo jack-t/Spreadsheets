@@ -17,7 +17,7 @@
             <td>@fee.County</td>
             <td>@fee.ProductTypeName</td>
             <td>$@fee.CurrentPrice</td>
-            <td>@fee.Pending</td>
+            <td><span class="glyphicon @(fee.Pending ? "glyphicon-ok" : "glyphicon-remove")"></span></td>
         </tr>
     }
 </table>
