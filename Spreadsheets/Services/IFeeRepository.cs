@@ -36,8 +36,8 @@ namespace Services
                         {
                             while (reader.Read())
                             {
-                                ret.Add(new Fee(reader.GetString(0), reader.GetString(1), reader.GetString(2),
-                                    reader.GetInt32(3), reader.GetBoolean(4)));
+                                ret.Add(new Fee(reader.GetString(1), reader.GetString(2), reader.GetString(3),
+                                    reader.GetInt32(4), reader.GetBoolean(5)));
                             }
                         }
                     }

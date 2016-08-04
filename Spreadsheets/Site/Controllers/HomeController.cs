@@ -13,8 +13,8 @@ namespace Site.Controllers
 {
     public class HomeController : Controller
     {
-        private IFeeRepository _fees;
-        private ISpreadsheetManagementService _managementService;
+        private readonly IFeeRepository _fees;
+        private readonly ISpreadsheetManagementService _managementService;
 
         public HomeController(IFeeRepository fees, ISpreadsheetManagementService spreadsheet)
         {
@@ -39,10 +39,11 @@ namespace Site.Controllers
         {
             using (var mstream = new MemoryStream())
             {
-                var stream = _managementService.Download(_fees.GetDataTable());
-                stream.Seek(0, SeekOrigin.Begin);
-                stream.CopyTo(mstream);
-
+                using (var stream = _managementService.Download(_fees.GetDataTable()))
+                {
+                    stream.Seek(0, SeekOrigin.Begin);
+                    stream.CopyTo(mstream);
+                }
                 return new FileContentResult(mstream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
         }
