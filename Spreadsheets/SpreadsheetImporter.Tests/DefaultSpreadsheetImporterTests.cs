@@ -30,12 +30,16 @@ namespace SpreadsheetImporter.Tests
                 _workbook.Worksheets["Sheet1"]["A1"].Value = "column1";
                 _workbook.Worksheets["Sheet1"]["A2"].Value = "column2";
                 _workbook.Worksheets["Sheet1"]["A3"].Value = "column3";
-                _template = new StubSpreadsheetTemplate(_workbook);
+                _template = new StubSpreadsheetTemplate(_workbook, null, new Dictionary<int, string>
+                {
+                    [1] = "column1",
+                    [2] = "column2",
+                    [3] = "column3"
+                });
                 _connectionProvider = new DefaultSqlConnectionProvider("main");
-                _importer = new DefaultSpreadsheetImporter(_connectionProvider,
-                    "InsertIntoTestSP");
+                _importer = new DefaultSpreadsheetImporter(_connectionProvider, "dummy");
 
-                _table = _importer.StripExcelData(_workbook, "Sheet1");
+                _table = _importer.StripExcelData(_workbook, _template);
             }
 
             [ExpectedException(typeof(IndexOutOfRangeException))]

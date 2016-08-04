@@ -1,4 +1,5 @@
-﻿using Spire.Xls;
+﻿using System.Collections.Generic;
+using Spire.Xls;
 
 namespace SpreadsheetImporter.Tests.Stubs
 {
@@ -24,5 +25,11 @@ namespace SpreadsheetImporter.Tests.Stubs
 
         public string DataSheetName => "Sheet1";
         public string GuidCell => "AA1";
+        public Dictionary<string, int> ExportColumnMap { get; }
+        public Dictionary<int, string> ImportColumnMap { get; }
+        public int FindLastRowOfData(Worksheet worksheet)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
