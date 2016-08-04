@@ -19,7 +19,7 @@ namespace Services
         {
             _connectionProvider = connectionProvider;
             var exporter = new DefaultSpreadsheetExporter();
-            var importer = new DefaultSpreadsheetImporter(connectionProvider, "InsertIntoFeesSP");
+            var importer = new DefaultSpreadsheetImporter(connectionProvider, "InsertIntoFees2SP");
             var template = new TestTemplate();
 
             _service = new SpreadsheetService(exporter, importer, new AlwaysTrueSpreadsheetValidator(), template);

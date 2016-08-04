@@ -14,7 +14,6 @@ namespace Site
 {
     public class Startup
     {
-        private string _dbconnection = @"Data Source = (localdb)\MSSQLLocalDB;Initial Catalog = Spreadsheets; Integrated Security = True";
 
         public Startup(IHostingEnvironment env)
         {
@@ -36,7 +35,7 @@ namespace Site
             services.AddMvc();
             services.AddTransient<IFeeRepository, FeeRepository>();
             services.AddTransient<ISpreadsheetManagementService, SpreadsheetManagementService>();
-            services.AddTransient<ISqlConnectionProvider>(c => new DefaultSqlConnectionProvider(_dbconnection));
+            services.AddTransient<ISqlConnectionProvider>(c => new DefaultSqlConnectionProvider(Configuration.GetConnectionString("main")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
